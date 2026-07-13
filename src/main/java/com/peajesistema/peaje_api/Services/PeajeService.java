@@ -1,7 +1,5 @@
 package com.peajesistema.peaje_api.Services;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +13,6 @@ public class PeajeService {
 
     @Autowired
     private VehiculoRepository vehiculoRepository;
-
-    private final Map<String, Vehiculo> mapaVehiculos = new HashMap<>();
 
     public PeajeService(VehiculoRepository vehiculoRepository){
         this.vehiculoRepository = vehiculoRepository;
