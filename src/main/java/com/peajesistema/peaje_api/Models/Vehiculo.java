@@ -1,9 +1,22 @@
-package com.peajesistema.peaje_api.Models;
+package com.peajesistema.peaje_api.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "vehiculos")
 public class Vehiculo {
+
+    @Id
     private String tagId;
+    
     private String propietario;
     private double balance;
+
+    public Vehiculo(){
+
+    }
 
     // * contructor
     public Vehiculo(String tagId, String propietario, double balance){
@@ -28,5 +41,6 @@ public class Vehiculo {
     public void setBalance(double balance){
         this.balance = balance;
     }
+
 
 }
