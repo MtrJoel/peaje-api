@@ -16,9 +16,6 @@ public class PeajeService {
 
     public PeajeService(VehiculoRepository vehiculoRepository){
         this.vehiculoRepository = vehiculoRepository;
-
-        vehiculoRepository.save( new Vehiculo("toyota-centra", "Joel Montero", 350.45));
-        vehiculoRepository.save( new Vehiculo("honda-civic", "Sawuel Montero", 500.15));
     }
 
     public String procesarPasoPeaje(String tagId, double costo){
