@@ -1,5 +1,7 @@
 package com.peajesistema.peaje_api.Controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.peajesistema.peaje_api.Services.PeajeService;
+import com.peajesistema.peaje_api.models.Vehiculo;
 
 @RestController
-@RequestMapping("api/peaje")
+@RequestMapping("vehiculos")
 public class PeajeController {
     @Autowired
     private PeajeService peajeService;
@@ -29,12 +32,24 @@ public class PeajeController {
             return peajeService.procesarPasoPeaje(tagId, costo);
     }
 
-    @PutMapping("/{tagId}/recargar")
+    @PutMapping("/recargar/{tagId}")
     public String recargarPeage(
         @PathVariable String tagId,
         @RequestBody double monto
     ){
         return peajeService.recargarCredito(tagId, monto);
+    }
+
+    @GetMapping("/{tagId}")
+    public String buscarVehiculo(
+        @PathVariable String tagId
+    ){
+        return peajeService.buscarVehiculo(tagId);
+    }
+
+    @GetMapping("")
+    public List<Vehiculo> buscarVehiculos() {
+        return peajeService.buscarVehiculos();
     }
 
 

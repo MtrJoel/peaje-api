@@ -1,6 +1,7 @@
 package com.peajesistema.peaje_api.Services;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,24 @@ public class PeajeService {
         vehiculoRepository.save(vActual);
 
         return "Vehículo : " + vActual.getTagId() + " Recargado nuevo balance : " + vActual.getBalance();
+    }
+    // ! Metodos para el administrador (Realizar consultas)
+
+    public String buscarVehiculo(String tagId){
+        
+        Optional<Vehiculo> consultarVehiculo = vehiculoRepository.findById(tagId.toLowerCase());
+
+         if(consultarVehiculo.isEmpty()){
+            return "Vehículo no registrado. No se pudo realizar el filtro";
+        }
+
+        Vehiculo vBuscado = consultarVehiculo.get();
+
+        return "Vehiculo buscado : " + vBuscado.getTagId() + " Pertenece a : " + vBuscado.getPropietario();
+    }
+
+
+    public List<Vehiculo> buscarVehiculos(){
+        return vehiculoRepository.findAll();
     }
 }
