@@ -39,5 +39,19 @@ public class PeajeService {
 
     }
 
+    // ! metodo para recargar balance
+    public String recargarCredito(String tagId, double monto){
+        Optional<Vehiculo> vehiculoRecargar = vehiculoRepository.findById(tagId.toLowerCase());
 
+        if(vehiculoRecargar.isEmpty()){
+            return "Vehículo no registrado. No se pudo realizar la recarga";
+        }
+
+        Vehiculo vActual = vehiculoRecargar.get();
+
+        vActual.setBalance(vActual.getBalance() + monto);
+        vehiculoRepository.save(vActual);
+
+        return "Vehículo : " + vActual.getTagId() + " Recargado nuevo balance : " + vActual.getBalance();
+    }
 }
