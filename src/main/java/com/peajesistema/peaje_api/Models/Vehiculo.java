@@ -12,6 +12,7 @@ public class Vehiculo {
     private String tagId;
     
     private String propietario;
+    private String tipo;
     private double balance;
 
     public Vehiculo(){
@@ -19,10 +20,11 @@ public class Vehiculo {
     }
 
     // * contructor
-    public Vehiculo(String tagId, String propietario, double balance){
+    public Vehiculo(String tagId, String propietario, double balance, String tipo){
         this.tagId = tagId;
         this.propietario = propietario;
         this.balance =  balance;
+        this.tipo = tipo;
     }
 
     // * getter y setters
@@ -40,6 +42,14 @@ public class Vehiculo {
 
     public void setBalance(double balance){
         this.balance = balance;
+    }
+
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+
+    public String getTipo(){
+        return tipo;
     }
 
 

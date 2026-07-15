@@ -27,9 +27,9 @@ public class PeajeController {
 
     @GetMapping("/cobrar")
     public String cobrarPeage(
-        @RequestParam String tagId,
-        @RequestParam double costo) {
-            return peajeService.procesarPasoPeaje(tagId, costo);
+        @RequestParam String tagId
+    ) {
+        return peajeService.procesarPasoPeaje(tagId);
     }
 
     @PutMapping("/recargar/{tagId}")

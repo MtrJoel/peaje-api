@@ -19,9 +19,10 @@ public class PeajeService {
         this.vehiculoRepository = vehiculoRepository;
     }
 
-    public String procesarPasoPeaje(String tagId, double costo){
+    public String procesarPasoPeaje(String tagId){
 
         Optional<Vehiculo> vehiculoOptional = vehiculoRepository.findById(tagId.toLowerCase());
+        double costo = 0.0;
 
         // ! verificar que exista el vehiculo
         if(vehiculoOptional.isEmpty()) {
@@ -29,6 +30,24 @@ public class PeajeService {
         }
         
         Vehiculo v = vehiculoOptional.get();
+        String tipoVehiculo = v.getTipo().toLowerCase(); // ? obtengo el tipo de vehiculo
+
+        switch (tipoVehiculo) {
+            case "carro":
+                costo = 60.0;
+                break;
+            
+            case "minibus":
+                costo = 120.0;
+                break;
+
+            case "camion":
+                costo = 250.0;
+                break;
+
+            default:
+                costo = 50.0;
+        }
 
         if(v.getBalance() < costo){
             return "Rechazado: Saldo insuficiente para " + v.getPropietario() + ". Balance: RD$" + v.getBalance();
