@@ -1,12 +1,15 @@
 package com.peajesistema.peaje_api.Services;
 
 import java.util.Optional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.peajesistema.peaje_api.models.Transaccion;
 import com.peajesistema.peaje_api.models.Vehiculo;
+import com.peajesistema.peaje_api.repository.TransaccionRepository;
 import com.peajesistema.peaje_api.repository.VehiculoRepository;
 
 @Service
@@ -14,6 +17,9 @@ public class PeajeService {
 
     @Autowired
     private VehiculoRepository vehiculoRepository;
+
+    @Autowired
+    private TransaccionRepository transaccionRepository;
 
     public PeajeService(VehiculoRepository vehiculoRepository){
         this.vehiculoRepository = vehiculoRepository;
@@ -49,11 +55,22 @@ public class PeajeService {
                 costo = 50.0;
         }
 
+        Transaccion t = new Transaccion();
+        t.setMonto(costo);
+        t.setTipo("COBRO");
+        t.setFecha(LocalDateTime.now());
+        t.setVehiculo(v);
+
         if(v.getBalance() < costo){
+            t.setEstado("RECHAZADO");
+            transaccionRepository.save(t);
             return "Rechazado: Saldo insuficiente para " + v.getPropietario() + ". Balance: RD$" + v.getBalance();
         }
 
         v.setBalance(v.getBalance() - costo);
+
+        t.setEstado("APROBADO");
+        transaccionRepository.save(t);
         vehiculoRepository.save(v);
         return "¡Paso APROBADO! Buen viaje " + v.getPropietario() + ". Nuevo balance: RD$" + v.getBalance();
 
