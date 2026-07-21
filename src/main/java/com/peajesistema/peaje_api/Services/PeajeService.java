@@ -110,4 +110,8 @@ public class PeajeService {
     public List<Vehiculo> buscarVehiculos(){
         return vehiculoRepository.findAll();
     }
+
+    public List<Transaccion> buscarTransaccions(){
+        return transaccionRepository.findAll();
+    }
 }

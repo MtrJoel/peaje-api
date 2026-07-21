@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.peajesistema.peaje_api.Services.PeajeService;
+import com.peajesistema.peaje_api.models.Transaccion;
 import com.peajesistema.peaje_api.models.Vehiculo;
 
 @RestController
@@ -50,6 +51,11 @@ public class PeajeController {
     @GetMapping("")
     public List<Vehiculo> buscarVehiculos() {
         return peajeService.buscarVehiculos();
+    }
+
+    @GetMapping("/transacciones")
+    public List<Transaccion> buscarTransaccions(){
+        return peajeService.buscarTransaccions();
     }
 
 
